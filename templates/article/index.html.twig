@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<div class="body">
+    <div class="column example-wrapper update-size">
+        <div class="article-container">
+                <a href="/articles/add"><img class="article-icon" src="/assets/icons/plus-circle-fill.svg" alt="add_article"></a>
+        </div>
+        {% for article in articles %}
+        <div class="article-container">
+            <div class="icon-container">
+                <a href="/article/{{article.slug}}"><img class="article-icon" src="/assets/icons/card-text.svg" alt="read_article"></a>
+                <a href="/article/update/{{article.slug}}"><img class="article-icon" src="/assets/icons/pencil-fill.svg" alt="edit_article"></a>
+                <form class="article-icon" action="/article/delete/{{article.slug}}" method="post" >
+                        <input type="hidden" name="_method" value="DELETE" />
+
+                        <input class="icon-trash" type="submit" value="">
+                </form>
+            </div>
+            <h2 class="article-title">{{article.title}}</h2>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

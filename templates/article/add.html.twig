@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<div class="body">
+    <div class="row g-3 update-size">
+        <form action="" method="POST" class="form-example" enctype="multipart/form-data">
+            <div class="mb-3">
+            <label for="title" class="form-label" >Titre</label>
+            <input type="text" name="title" class="form-control" id="title" placeholder="Mon titre" maxlength="150" required>
+            </div>
+            <div class="mb-3">
+                <label for="introduction" class="form-label">Introduction</label>
+                <input type="text" name="introduction" class="form-control" id="introduction" placeholder="Mon introduction" maxlength="255">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" name="content" id="content" rows="3" placeholder="Mon article" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input class="form-control" name="image" type="file" id="image">
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">C'est parti !</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

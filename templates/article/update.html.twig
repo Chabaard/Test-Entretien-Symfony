@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+
+<div class="body">
+
+    <div class="row g-3 update-size">
+        <form action="" method="POST" class="form-example" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="UPDATE" />
+            <div class="mb-3">
+            <label for="title" class="form-label" >Titre</label>
+            <input type="text" name="title" class="form-control" id="title" placeholder="Mon titre" maxlength="150" value={{article.title}} disabled required>
+            </div>
+
+            <img class="article-img" src="/download/{{article.photo}}" alt="my_image">
+            <div class="mb-3">
+                <label for="introduction" class="form-label">Introduction</label>
+                <input type="text" name="introduction" class="form-control" id="introduction" placeholder="Mon introduction" maxlength="255" value="{{article.introduction}}">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" name="content" id="content" rows="15" placeholder="Mon article" required>{{article.content}}</textarea>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">C'est parti !</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
