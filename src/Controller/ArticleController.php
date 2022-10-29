@@ -42,10 +42,20 @@ class ArticleController extends AbstractController
     #[Route('articles/add', name: 'send_add_articles', methods: ['post'])]
     public function sendAdd(Request $request, EntityManagerInterface $manager): Response
     {
-        // image
-        $m = "download/".$_FILES['image']['name'];
+        function verifyFileExist ($fileName){
+            if (file_exists('download/'.$fileName)){
+                $fileName = substr($fileName, 0 , strlen($fileName) - 4) . '1.png';
+                return verifyFileExist($fileName);
+            }else{
+                return $fileName;
+            }
 
+        }
         $request = Request::createFromGlobals();
+        $fileName = $_FILES['image']['name'];
+        $fileName = verifyFileExist($fileName);
+        // image
+        $m = 'download/'. $fileName;
 
         // fabrication avant implémentation
         $article = new Article();
@@ -53,7 +63,7 @@ class ArticleController extends AbstractController
         $article->setSlug($this->slugger->slug($article->getTitle())->lower());
         $article->setIntroduction($request->get('introduction'));
         $article->setContent($request->get('content'));
-        $article->setPhoto($_FILES['image']['name']);
+        $article->setPhoto($fileName);
 
         $manager->persist($article);
         // implémentation
@@ -105,8 +115,8 @@ class ArticleController extends AbstractController
             );
         }
         // je vérifie que le fichier existe dans le dossier
-        If (file_exists('/download'.$article->getPhoto())){
-            unlink($article->getPhoto());
+        if (file_exists('download/'.$article->getPhoto())){
+            unlink('download/'. $article->getPhoto());
         }
         // recuperation du manager et suppression de la data
         $entityManager = $doctrine->getManager();
