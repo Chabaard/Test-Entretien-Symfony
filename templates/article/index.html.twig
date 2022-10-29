@@ -1,24 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Administrations{% endblock %}
 
 {% block body %}
 <div class="body">
     <div class="column example-wrapper update-size">
         <div class="article-container">
+                {# Lien pour ajouter un article #}
                 <a href="/articles/add"><img class="article-icon" src="/assets/icons/plus-circle-fill.svg" alt="add_article"></a>
         </div>
+
+        {# LISTE des articles de la page Admin #}
         {% for article in articles %}
         <div class="article-container">
             <div class="icon-container">
+                {# lien vers la page détail d'un article #}
                 <a href="/article/{{article.slug}}"><img class="article-icon" src="/assets/icons/card-text.svg" alt="read_article"></a>
+                {# lien vers la page modifier un article #}
                 <a href="/article/update/{{article.slug}}"><img class="article-icon" src="/assets/icons/pencil-fill.svg" alt="edit_article"></a>
+                {# lien pour supprimer un article #}
                 <form class="article-icon" action="/article/delete/{{article.slug}}" method="post" >
                         <input type="hidden" name="_method" value="DELETE" />
 
                         <input class="icon-trash" type="submit" value="">
                 </form>
             </div>
+            {# Titre de l'article #}
             <h2 class="article-title">{{article.title}}</h2>
 
         </div>

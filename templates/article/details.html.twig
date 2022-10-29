@@ -1,10 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}
+
+     {% if(article) %}
+    {{article.title}}
+     {% else %}
+    Les articles
+     {% endif %}
+
+{% endblock %}
 
 {% block body %}
 <div class="body">
-{% if(article) %}
+    {# Si un var article alors on affiche l'article#}
+    {% if(article) %}
     <div class="details-article-container">
         <h1>{{ article.title }}</h1>
         {% if(article.photo) %}
@@ -13,26 +22,21 @@
         <p>{{article.introduction}}</p>
         <p> {{article.content}}   </p>
     </div>
-{% endif %}
-
-     {% if(article) %}
     <div class="details-other-articles-container">
-     {% else %}
+        <h3>Consulter d'autres articles</h3>
+    {% else %}
+    {# Si pas de var article on change la disposition des articles affiché en page d'accueil #}
     <div class="details-other-articles-container-accueil">
-     {% endif %}
+    {% endif %}
 
-     {% if(article) %}
-    <h3>Consulter d'autres articles</h3>
-     {% endif %}
+    {# Affichage de la listes des articles #}
         {% for article in articles %}
         <a class="details-other-articles-link" href="/article/{{article.slug}}">
-                <div class="articles-link-img" style="background-image: url('/download/{{article.photo}}');
-">
-                </div>
-                <div class="articles-link-text">
-                    <h2 class="">{{article.title}}</h2>
-                    <p class="">{{article.introduction}}</p>
-                </div>
+            <div class="articles-link-img" style="background-image: url('/download/{{article.photo}}');"></div>
+            <div class="articles-link-text">
+                <h2 class="">{{article.title}}</h2>
+                <p class="">{{article.introduction}}</p>
+            </div>
         </a>
         {% endfor %}
 
